@@ -3,16 +3,16 @@ import ballerina/http;
 import ballerina/io;
 import ballerina/lang.'string as strings;
 
-configurable string host = ?;
-configurable string username = ?;
-configurable string password = ?;
-configurable int port = ?;
+// configurable string host = ?;
+// configurable string username = ?;
+// configurable string password = ?;
+// configurable int port = ?;
 
 ftp:ClientConfiguration ftpConfig = {
         protocol: ftp:SFTP,
-        host: host,
-        port: port,
-        auth: {credentials: {username: username, password: password}}
+        host: "ftp.support.wso2.com",
+        port: 22,
+        auth: {credentials: {username: "voluepoc", password: "kSKY8Ecx*lfHuKHnWrEs"}}
 };
 
 final ftp:Client clientEp = check new(ftpConfig);
