@@ -15,27 +15,24 @@ ftp:ClientConfiguration ftpConfig = {
         auth: {credentials: {username: username, password: password}}
 };
 
-ftp:Client clientEp = check new(ftpConfig);
+final ftp:Client clientEp = check new(ftpConfig);
 
 
 service /processEDI on new http:Listener(5050) {
-    resource function get .(string edifilePath) returns json|error? {
+    resource isolated function get .(string edifilePath) returns json|error? {
       string ediMultipleText = check readFile(edifilePath);
       Metered_services_consumption_report_message mscons = check fromEdiString(ediMultipleText);
       return mscons.toJsonString();
     }
 }
 
-function readFile(string filePath) returns string|error {
-    stream<byte[] & readonly, io:Error?> str = check clientEp -> get("/voluepoc/EDIFiles/" + filePath);
-    string fileContent = "";
-    record {|byte[] value;|}|io:Error? bArray = str.next();
-    if (bArray is record {|byte[] value;|}) {
-        fileContent = check strings:fromBytes(bArray.value);
-    }
-    io:Error? closeResult = str.close();
-    if (closeResult is io:Error) {
-        io:println("Error while closing stream in `get` operation.");
-    }
+isolated function readFile(string filePath) returns string|error {
+    stream<byte[], io:Error?> str = check clientEp -> get("/voluepoc/EDIFiles/" + filePath);
+    byte[] bArray = [];
+    check from byte[] content in str
+    do {
+        bArray.push(...content);
+    };
+    string fileContent = check strings:fromBytes(bArray);
     return fileContent;
 }
