@@ -73,22 +73,8 @@ dependencies = [
 
 [[package]]
 org = "ballerina"
-name = "ftp"
-version = "2.9.0"
-dependencies = [
-	{org = "ballerina", name = "io"},
-	{org = "ballerina", name = "jballerina.java"},
-	{org = "ballerina", name = "log"},
-	{org = "ballerina", name = "task"}
-]
-modules = [
-	{org = "ballerina", packageName = "ftp", moduleName = "ftp"}
-]
-
-[[package]]
-org = "ballerina"
 name = "http"
-version = "2.10.4"
+version = "2.10.5"
 dependencies = [
 	{org = "ballerina", name = "auth"},
 	{org = "ballerina", name = "cache"},
@@ -124,9 +110,6 @@ version = "1.6.0"
 dependencies = [
 	{org = "ballerina", name = "jballerina.java"},
 	{org = "ballerina", name = "lang.value"}
-]
-modules = [
-	{org = "ballerina", packageName = "io", moduleName = "io"}
 ]
 
 [[package]]
@@ -212,9 +195,6 @@ version = "0.0.0"
 dependencies = [
 	{org = "ballerina", name = "jballerina.java"},
 	{org = "ballerina", name = "lang.regexp"}
-]
-modules = [
-	{org = "ballerina", packageName = "lang.string", moduleName = "lang.string"}
 ]
 
 [[package]]
@@ -328,10 +308,7 @@ name = "meter_consumption_processing"
 version = "0.1.0"
 dependencies = [
 	{org = "ballerina", name = "edi"},
-	{org = "ballerina", name = "ftp"},
 	{org = "ballerina", name = "http"},
-	{org = "ballerina", name = "io"},
-	{org = "ballerina", name = "lang.string"},
 	{org = "ballerinai", name = "observe"}
 ]
 modules = [
